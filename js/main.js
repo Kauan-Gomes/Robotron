@@ -39,7 +39,7 @@ const estatistica = document.querySelectorAll('[data-estatistica]')
 controle.forEach ((elemento) => {
     elemento.addEventListener("click", (evento) => {
         manipulaDados(evento.target.dataset.controle, evento.target.parentNode);
-        atualizaEstatistica(evento.target.dataset.peca)
+        atualizaEstatistica(evento.target.dataset.peca, evento.target.dataset.controle);
     })
 })
 
@@ -47,7 +47,7 @@ controle.forEach ((elemento) => {
 function manipulaDados(operacao, controle) {
     const peca = controle.querySelector('[data-contador]');
     
-    // ParseiInt servre para converter o valor para Inteiro ao inves de String
+    // ParseiInt serve para converter o valor para Inteiro ao inves de String
     if (operacao === "-") {
         peca.value = parseInt(peca.value) - 1
     } else {
@@ -55,10 +55,14 @@ function manipulaDados(operacao, controle) {
     }
 }
 
-function atualizaEstatistica(peca) {
-    console.log(pecas[peca])
-
+function atualizaEstatistica(peca, operacao) {
     estatistica.forEach( (elemento) => {
-        elemento.textContent = parseInt(elemento.textContent) + pecas[peca][elemento.dataset.estatistica]
+        if(operacao === '-'){
+            elemento.textContent = parseInt(elemento.textContent) - pecas[peca][elemento.dataset.estatistica]
+        }
+        else{
+            elemento.textContent = parseInt(elemento.textContent) + pecas[peca][elemento.dataset.estatistica]
+        }
+
     })
 }
