@@ -12,19 +12,19 @@ const pecas = {
         "energia": 0,
         "velocidade": -20
     },
-    "nucleos":{
+    "nucleos": {
         "forca": 0,
         "poder": 7,
         "energia": 48,
         "velocidade": -24
     },
-    "pernas":{
+    "pernas": {
         "forca": 27,
         "poder": 21,
         "energia": -32,
         "velocidade": 42
     },
-    "foguetes":{
+    "foguetes": {
         "forca": 0,
         "poder": 28,
         "energia": 0,
@@ -36,7 +36,7 @@ const estatistica = document.querySelectorAll('[data-estatistica]')
 
 
 
-controle.forEach ((elemento) => {
+controle.forEach((elemento) => {
     elemento.addEventListener("click", (evento) => {
         manipulaDados(evento.target.dataset.controle, evento.target.parentNode);
         atualizaEstatistica(evento.target.dataset.peca, evento.target.dataset.controle);
@@ -46,7 +46,7 @@ controle.forEach ((elemento) => {
 
 function manipulaDados(operacao, controle) {
     const peca = controle.querySelector('[data-contador]');
-    
+
     // ParseiInt serve para converter o valor para Inteiro ao inves de String
     if (operacao === "-") {
         peca.value = parseInt(peca.value) - 1
@@ -56,13 +56,34 @@ function manipulaDados(operacao, controle) {
 }
 
 function atualizaEstatistica(peca, operacao) {
-    estatistica.forEach( (elemento) => {
-        if(operacao === '-'){
+    estatistica.forEach((elemento) => {
+        if (operacao === '-') {
             elemento.textContent = parseInt(elemento.textContent) - pecas[peca][elemento.dataset.estatistica]
         }
-        else{
+        else {
             elemento.textContent = parseInt(elemento.textContent) + pecas[peca][elemento.dataset.estatistica]
         }
 
     })
 }
+
+
+
+const coresBotoes = document.querySelectorAll("[data-cor]")
+
+    coresBotoes.forEach((elemento) => {
+        elemento.addEventListener('click', (event) => {
+            const cor = event.target.dataset.cor
+            document.querySelector(".robo").src = "img/robotron 2000 - " + cor + ".png"
+        })
+    })
+
+
+
+
+
+
+
+
+
+
